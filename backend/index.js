@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     next();
 });
 
-const popularGames = [
+const games = [
     {
         id: 0,
         title: "Crystal Kepper",
@@ -40,6 +40,10 @@ const popularGames = [
         author: "Lonely Baobab",
         votes: 20,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/cristal-keeper/cover.png",
+        gameUrl: "",
+        categories: [
+            "popularGames"
+        ]
     },
     {
         id: 1,
@@ -48,6 +52,10 @@ const popularGames = [
         author: "F-Style",
         votes: 10,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/dangeons-n-caves-prologue/cover.png",
+        gameUrl: "",
+        categories: [
+            "popularGames"
+        ]
     },
     {
         id: 2,
@@ -56,10 +64,12 @@ const popularGames = [
         author: "MastWe",
         votes: 20,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/defence-of-crystal/cover.png",
-    },
-];
+        gameUrl: "",
+        categories: [
+            "newGames"
+        ]
 
-const newGames = [
+    },
     {
         id: 3,
         title: "Go Away",
@@ -67,6 +77,10 @@ const newGames = [
         author: "Mahisto",
         votes: 20,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/go-away/cover.jpg",
+        gameUrl: "",
+        categories: [
+            "newGames"
+        ]
     },
     {
         id: 4,
@@ -75,6 +89,10 @@ const newGames = [
         author: "IDKWIAm",
         votes: 10,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/gunner/cover.png",
+        gameUrl: "",
+        categories: [
+            "newGames"
+        ]
     },
     {
         id: 5,
@@ -83,6 +101,10 @@ const newGames = [
         author: "IDKWIAm",
         votes: 20,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/space-terror/cover.png",
+        gameUrl: "",
+        categories: [
+            "newGames"
+        ]
     },
     {
         id: 6,
@@ -91,8 +113,12 @@ const newGames = [
         author: "niclan",
         votes: 10,
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/square-slayer/cover.png",
-    },
-];
+        gameUrl: "",
+        categories: [
+            "newGames"
+        ]
+    }
+]
 
 // Регистрация нового пользователя
 app.post('/register', (req, res) => {
@@ -106,6 +132,18 @@ app.post('/register', (req, res) => {
     });
 });
 
+app.get('/search', (req, res) => {
+    const id = req.query.id;
+    const game = games.find(game => game.id === id);
+
+    if (game) {
+        res.json(game);
+    } else {
+        res.status(404).json({ error: 'Game not found' });
+    }
+});
+
+
 // Аутентификация пользователя
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -117,18 +155,16 @@ app.post('/login', (req, res) => {
         if (!row) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
-        res.json({ message: 'Page successful' });
+        res.status(200).json({ message: 'Page successful' });
     });
 });
 
 // Получение списка новых игр
-app.get('/api/getNewGames', (req, res) => {
-    res.json(newGames);
-});
+app.get('/api/getGamesByCategory', (req, res) => {
+    const category = req.query.category;
+    const filteredGames = games.filter(game => game.categories.includes(category));
 
-// Получение списка популярных игр
-app.get('/api/getPopularGames', (req, res) => {
-    res.json(popularGames);
+    res.json(filteredGames);
 });
 
 // Добавление новой игры в базу данных

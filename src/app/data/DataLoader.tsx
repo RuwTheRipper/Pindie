@@ -1,8 +1,8 @@
-import {Game} from "@/app/data/Data";
+import {API_URL, Game} from "@/app/data/Data";
 
 const getGameByID = async (id: string): Promise<Game> => {
     try {
-        const response = await fetch(`BASE_URL/search?id=${id}`);
+        const response = await fetch(`${API_URL}/search?id=${id}`);
         if (!response.ok) {
             throw new Error('Failed to fetch game');
         }

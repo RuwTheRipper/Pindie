@@ -47,38 +47,35 @@ const useGameData = () => {
     const [loading, setLoading] = useState<boolean>(true); // Добавляем loading
 
     useEffect(() => {
-        const fetchPopularGames = async (): Promise<void> => {
+        const fetchGamesByCategory = async (category: string): Promise<void> => {
             try {
-                const response = await fetch(`${API_URL}/getPopularGames`);
+                const response = await fetch(`${API_URL}/getGamesByCategory?category=${category}`);
                 if (!response.ok) {
                     setError(true);
-                    setErrorMessage("Failed to fetch popular games!");
+                    setErrorMessage(`Failed to fetch ${category} games!`);
                     return;
                 }
                 const data: Game[] = await response.json();
-                setPopularGames(data);
+                if (category === 'popularGames') {
+                    setPopularGames(data);
+                } else if (category === 'newGames') {
+                    setNewGames(data);
+                }
             } catch (error) {
                 console.error(error);
                 setError(true);
-                setErrorMessage("An error occurred while fetching popular games!");
+                setErrorMessage(`An error occurred while fetching ${category} games!`);
             }
         };
 
+        // Загрузка популярных игр
+        const fetchPopularGames = async (): Promise<void> => {
+            await fetchGamesByCategory('popularGames');
+        };
+
+        // Загрузка новых игр
         const fetchNewGames = async (): Promise<void> => {
-            try {
-                const response = await fetch(`${API_URL}/getNewGames`);
-                if (!response.ok) {
-                    setError(true);
-                    setErrorMessage("Failed to fetch new games!");
-                    return;
-                }
-                const data: Game[] = await response.json();
-                setNewGames(data);
-            } catch (error) {
-                console.error(error);
-                setError(true);
-                setErrorMessage("An error occurred while fetching new games!");
-            }
+            await fetchGamesByCategory('newGames');
         };
 
         fetchPopularGames().then(() => setLoading(false)); // Устанавливаем loading в false после завершения загрузки

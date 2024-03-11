@@ -6,6 +6,7 @@ interface Game {
     votes: number;
     imageUrl: string;
     gameUrl: string;
+    categories: string[];
 }
 
 const API_URL: string = "http://localhost:4000/api";
