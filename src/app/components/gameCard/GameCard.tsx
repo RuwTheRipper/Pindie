@@ -8,6 +8,7 @@ import Image from "@/app/components/ui/img/Image";
 import {Anchor} from "@/app/components/ui/a/Anchor";
 
 interface GameCardProps {
+    id: string;
     title: string;
     description: string;
     author: string;
@@ -45,10 +46,11 @@ const GameCardLink: React.FC<{ href: string; children: React.ReactNode }> = ({ h
 };
 
 
-const GameCard: React.FC<GameCardProps> = ({ title, description, author, votes, imageUrl }) => {
+const GameCard: React.FC<GameCardProps> = ({ id, title, description, author, votes, imageUrl }) => {
+
     return (
         <li className="cards-list__item">
-            <GameCardLink href="/game-id">
+            <GameCardLink href={`/game/${id}`}>
                 <article className="card">
                     <GameCardImage imageUrl={imageUrl} />
                     <GameCardInfo title={title} description={description} author={author} votes={votes} />

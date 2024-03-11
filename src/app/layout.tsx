@@ -3,8 +3,6 @@ import "./globals.css";
 import React from "react";
 import Footer from "@/app/components/include/footer/Footer";
 import Header from "@/app/components/include/header/Header";
-import {useRouter} from "next/navigation";
-
 
 export const metadata: Metadata = {
   title: 'Pindie',
@@ -12,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children, }: Readonly<{ children: React.ReactNode; }>) {
+
   return (
     <html lang="ru">
     <body>

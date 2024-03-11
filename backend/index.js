@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 
 const popularGames = [
     {
+        id: 0,
         title: "Crystal Kepper",
         description: "Управляй боевым дроном, чтобы любой ценой защитить кристалл от враждебных космо-слизней.",
         author: "Lonely Baobab",
@@ -41,6 +42,7 @@ const popularGames = [
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/cristal-keeper/cover.png",
     },
     {
+        id: 1,
         title: "Dangeons'n'Caves. Prologue",
         description: "Безымянный герой исследует пещеры и подземелья, чтобы найти больше информации о себе.",
         author: "F-Style",
@@ -48,6 +50,7 @@ const popularGames = [
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/dangeons-n-caves-prologue/cover.png",
     },
     {
+        id: 2,
         title: "Defence of Crystal",
         description: "Защищай магический кристалл от монстров и уничтожай кладбища, чтобы спасти Землю, которую поглотил мрак.",
         author: "MastWe",
@@ -58,6 +61,7 @@ const popularGames = [
 
 const newGames = [
     {
+        id: 3,
         title: "Go Away",
         description: "Управляй автомобилем, избегая аварий и перепрыгивая препятствия на пути к следующему уровню.",
         author: "Mahisto",
@@ -65,6 +69,7 @@ const newGames = [
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/go-away/cover.jpg",
     },
     {
+        id: 4,
         title: "G.U.N.N.E.R.",
         description: "Продержись как можно дольше, отбиваясь от врагов, которых будет становиться всё больше.",
         author: "IDKWIAm",
@@ -72,6 +77,7 @@ const newGames = [
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/gunner/cover.png",
     },
     {
+        id: 5,
         title: "Space Terror",
         description: "Лети как можно дальше в космическом пространстве, уничтожая всё на своём пути.",
         author: "IDKWIAm",
@@ -79,6 +85,7 @@ const newGames = [
         imageUrl: "https://code.s3.yandex.net/teens/pindie-games/space-terror/cover.png",
     },
     {
+        id: 6,
         title: "Square Slayer",
         description: "Уворачивайся и отстреливайся от озлобленных квадратов и собирай жизни для перехода на следующий уровень.",
         author: "niclan",
